@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "@prisma/cli": "^2.13.1",
-    "@types/node": "^14.14.16"
+    "@types/node": "^14.14.16",
+    "prettier": "^2.2.1"
   }
 }
