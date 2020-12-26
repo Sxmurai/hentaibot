@@ -17,6 +17,7 @@
   "_moduleAliases": {
     "@core": "build/core/index.ts"
   },
+  "_moduleAliasIgnoreWarning": true,
   "dependencies": {
     "@melike2d/logger": "^1.0.4",
     "@prisma/client": "^2.13.1",
