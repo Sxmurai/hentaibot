@@ -1,0 +1,7 @@
+# Remove Directories
+node_modules/
+build/ 
+
+# Files
+config.yml
+prisma/.env
