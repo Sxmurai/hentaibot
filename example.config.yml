@@ -1,0 +1,8 @@
+bot:
+  token:
+  prefixes:
+    - hb!
+    - "hentai, "
+  owners:
+    - "owner 1"
+    - "owner 2"
