@@ -16,6 +16,13 @@
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
+"@melike2d/logger@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@melike2d/logger/-/logger-1.0.4.tgz#b039ba4148f82f34fb328c43c495fa98f03dfd78"
+  integrity sha512-jFUwXpm3mJHdREW68G3y5E5BrXlVUr6xuZ1uuPVcEKlpVcR2gPUR9nut5LHQwwDhrBe4EGVSRy/e1BQpZQcG1A==
+  dependencies:
+    fecha "^4.2.0"
+
 "@prisma/bar@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@prisma/bar/-/bar-0.0.1.tgz#088c4fbbb79c588391437ade9fd3a85527e753b3"
@@ -105,6 +112,11 @@ event-target-shim@^5.0.0:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
+
+fecha@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/fecha/-/fecha-4.2.0.tgz#3ffb6395453e3f3efff850404f0a59b6747f5f41"
+  integrity sha512-aN3pcx/DSmtyoovUudctc8+6Hl4T+hI9GBBHLjA76jdZl7+b1sgh5g4k+u/GL3dTy1/pnYzKp69FpJ0OicE3Wg==
 
 is-obj@^2.0.0:
   version "2.0.0"
