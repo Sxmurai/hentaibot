@@ -10,14 +10,15 @@
   "scripts": {
     "postinstall": "npx link-module-alias",
     "compile": "rm -rf build && tsc && clear",
-    "prerun": "npx prisma generate && yarn compile",
+    "prerun": "npx prisma generate && yarn postinstall && yarn compile",
     "dev:run": "yarn prerun && node .",
-    "prod:run": "yarn prerun && pm2 restart sharder && clear && pm2 logs sharder"
+    "prod:run": "yarn prerun && pm2 restart sharder && clear && pm2 logs sharder",
+    "test:run": "node ."
   },
   "_moduleAliases": {
-    "@core": "build/core/index.ts"
-  },
-  "_moduleAliasIgnoreWarning": true,
+		"@core": "build/core/index.js"
+	},
+	"_moduleAliasIgnoreWarning": true,
   "dependencies": {
     "@melike2d/logger": "^1.0.4",
     "@prisma/client": "^2.13.1",

@@ -1,0 +1,21 @@
+{
+	"compileOnSave": true,
+	"compilerOptions": {
+		"target": "ES2019",
+		"module": "CommonJS",
+		"strict": true,
+		"alwaysStrict": true,
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"baseUrl": "./src/",
+		"paths": {
+			"@core": ["core/index.ts"]
+		},
+		"pretty": true,
+		"removeComments": true,
+		"outDir": "build"
+	}
+}

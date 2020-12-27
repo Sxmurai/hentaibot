@@ -1,12 +1,13 @@
+import { Config } from "./core/general/Config";
 import { Logger, ConsoleTransport, PrettyFormatter, LogLevel } from "@melike2d/logger";
 import { ShardingManager } from "discord.js";
 import { join } from "path";
 
+(global as any).config = new Config("config.yml");
+
 const manager = new ShardingManager(join(__dirname, "bot", "bot.js"), {
-	token: "",
+	token: config.get("bot.token"),
 	totalShards: "auto",
-	respawn: true,
-	mode: "worker",
 });
 
 const logger = new Logger("hentai.sharding", {
@@ -20,4 +21,5 @@ const logger = new Logger("hentai.sharding", {
 	],
 });
 
+manager.spawn("auto")
 manager.on("shardCreate", ({ id }) => logger.info(`Spawned shard ${id}.`));

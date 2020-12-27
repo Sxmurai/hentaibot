@@ -1,9 +1,0 @@
-printWidth: 120
-tabWidth: 2
-useTabs: true
-semi: true
-singleQuote: false # double quotes ftw
-quoteProps: "as-needed"
-trailingComma: "all"
-bracketSpacing: true
-arrowParens: "always"
