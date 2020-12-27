@@ -5,5 +5,13 @@ import { event } from "@core";
 export default class ReadyEvent extends Listener {
   public exec() {
     this.client.logger.info(`Logged in as ${this.client.user!.username}`);
+
+    this.client.user!.setPresence({
+      status: "dnd",
+      activity: {
+        name: `${config.get<string[]>("bot.prefixes")![0]}help`,
+        type: "LISTENING",
+      },
+    });
   }
 }

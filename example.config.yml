@@ -1,8 +1,8 @@
 bot:
   token:
   prefixes:
-    - hb!
-    - "hentai, "
+    - ay!
+    - "ayaka, "
   owners:
     - "owner 1"
     - "owner 2"

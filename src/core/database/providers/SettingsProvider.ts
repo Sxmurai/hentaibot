@@ -7,7 +7,7 @@ interface Setting {
 }
 
 const defaults: Setting = {
-	prefixes: ["hb!", "hentai, "],
+	prefixes: ["ay!", "ayaka, "],
 };
 
 export class SettingsProvider {
