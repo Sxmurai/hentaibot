@@ -3,6 +3,8 @@ import {
   CommandOptions,
   Listener,
   ListenerOptions,
+  Inhibitor,
+  InhibitorOptions,
 } from "discord-akairo";
 
 /* Commands */
@@ -23,6 +25,20 @@ export const command = (id: string, options: CommandOptions = {}) => {
 /* Events */
 export const event = (id: string, options?: ListenerOptions) => {
   return <T extends new (...args: any[]) => Listener>(target: T): T => {
+    return class extends target {
+      constructor(...args: any[]) {
+        super(id, options);
+        void args;
+      }
+    };
+  };
+};
+
+/* inhibitor shit */
+export const inhibitor = (id: string, options: InhibitorOptions = {}) => {
+  options.reason = options.reason ?? id;
+
+  return <T extends new (...args: any[]) => Inhibitor>(target: T): T => {
     return class extends target {
       constructor(...args: any[]) {
         super(id, options);

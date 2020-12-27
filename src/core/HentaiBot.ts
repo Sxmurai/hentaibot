@@ -14,6 +14,8 @@ import { HentaiEmbed } from "./structures/HentaiEmbed";
 import { BotOptions } from "./index";
 import { join } from "path";
 import { SettingsProvider } from "./database/providers/SettingsProvider";
+import { UserProvider } from "./database/providers/UserProvider";
+import { CommandGenerator, FavoriteHandler } from "./general";
 
 export class HentaiBot extends AkairoClient {
   public logger = new Logger("hentai.client", {
@@ -28,6 +30,9 @@ export class HentaiBot extends AkairoClient {
   });
 
   public settings = new SettingsProvider();
+  public usrs = new UserProvider();
+
+  public favorites = new FavoriteHandler();
 
   public cfg: BotOptions;
 
@@ -39,8 +44,9 @@ export class HentaiBot extends AkairoClient {
       messageCacheLifetime: 60,
       messageSweepInterval: 100,
       ws: {
-        intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_VOICE_STATES"],
+        intents: ["GUILDS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"],
       },
+      partials: ["REACTION", "USER"],
     });
 
     this.cfg = cfg;
@@ -50,7 +56,11 @@ export class HentaiBot extends AkairoClient {
     directory: join(__dirname, "..", "bot", "commands"),
     prefix: (msg) =>
       msg.guild
-        ? this.settings.get<any>(msg.guild, "prefixes", config.get("bot.prefixes"))
+        ? this.settings.get<any>(
+            msg.guild,
+            "prefixes",
+            config.get("bot.prefixes")
+          )
         : config.get("bot.prefixes"),
     allowMention: true,
     argumentDefaults: {
@@ -98,18 +108,83 @@ export class HentaiBot extends AkairoClient {
   });
 
   public inhibitors: InhibitorHandler = new InhibitorHandler(this, {
-    directory: join(__dirname, "..", "bot", "events"),
+    directory: join(__dirname, "..", "bot", "inhibitors"),
   });
 
   public start() {
     this.commands.useListenerHandler(this.events);
     this.commands.useInhibitorHandler(this.inhibitors);
 
-    [this.commands, this.events].map((handler) =>
+    this.events.setEmitters({
+      commands: this.commands,
+    });
+
+    const generator = new CommandGenerator(this);
+    generator.register("https://nekobot.xyz/api/image", [
+      {
+        id: "hentai",
+        aliases: ["h", "hentie"],
+        description: "Displays a hentai gif or image",
+      },
+
+      {
+        id: "hkitsune",
+      },
+
+      {
+        id: "hanal",
+        aliases: ["hentaianal", "anal"],
+        description: "Anal, but it's hentai",
+      },
+
+      {
+        id: "tentacle",
+        aliases: ["t"],
+        description: "Tentacle hentai... ew...",
+      },
+
+      {
+        id: "hboobs",
+        aliases: ["hentaiboobs", "boobs", "tits"],
+        description: "Boobs, but they're of anime chicks",
+      },
+
+      {
+        id: "paizuri",
+        aliases: ["titjob", "boobjob"],
+        description: "Boob job, but it's in hentai. Nice.",
+      },
+
+      {
+        id: "hthigh",
+        aliases: ["thigh", "thighs"],
+        description: "Thighs. Our co-dev sach would like this one.",
+      },
+
+      {
+        id: "hneko",
+        aliases: ["neko"],
+        description: "Nekos. What else do I put here John?",
+      },
+
+      {
+        id: "hass",
+        aliases: ["hentaiass", "ass"],
+        description: "Ass, but it's hentai",
+      },
+
+      {
+        id: "hmidriff",
+        description: "I honestly don't even know what this is, but it's hentai",
+      },
+    ]);
+
+    [this.commands, this.events, this.inhibitors].map((handler) =>
       handler.loadAll()
     );
 
     this.settings.init();
+    this.usrs.init();
 
     return super.login(this.cfg.token);
   }

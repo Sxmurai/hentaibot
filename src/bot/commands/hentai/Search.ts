@@ -28,6 +28,7 @@ import fetch from "node-fetch";
       default: 0,
     },
   ],
+  channel: "guild"
 })
 export default class SearchCommand extends Command {
   public cache = new Map<string, any[]>();
@@ -118,7 +119,7 @@ export default class SearchCommand extends Command {
     return fetch(url, {
       headers: {
         "Access-Control-Allow-Origin": "*",
-        Cookie: config.get<string>("apis.hentihaven")!,
+        Cookie: config.get<string>("apis.hentaihaven")!,
       },
     }).then((res) => res.json());
   }

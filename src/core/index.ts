@@ -11,10 +11,11 @@ export interface BotOptions {
   owners: string | string[];
 }
 
-import { Config } from "./general";
+import { Config, FavoriteHandler } from "./general";
 import { PrismaClient } from "@prisma/client";
 import { Logger } from "@melike2d/logger";
 import { SettingsProvider } from "./database/providers/SettingsProvider";
+import { UserProvider } from "./database/providers/UserProvider";
 
 import "discord-akairo";
 
@@ -42,7 +43,9 @@ declare module "discord-akairo" {
     events: ListenerHandler;
     inhibitors: InhibitorHandler;
     settings: SettingsProvider;
+    usrs: UserProvider;
     logger: Logger;
+    favorites: FavoriteHandler;
   }
 }
 

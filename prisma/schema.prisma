@@ -16,3 +16,10 @@ model Guilds {
 
   @@map("guilds")
 }
+
+model Users {
+  id   String @id
+  data String @default("{}")
+
+  @@map("users")
+}
