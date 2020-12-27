@@ -4,8 +4,6 @@ import { Message } from "discord.js";
 import { HentaiEmbed, command } from "@core";
 import fetch from "node-fetch";
 
-import AbortController from "abort-controller";
-
 @command("search", {
   aliases: ["hsearch"],
   description: {
