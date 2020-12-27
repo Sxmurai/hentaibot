@@ -35,11 +35,7 @@ export class CommandGenerator {
 
         public async exec(message: Message) {
           try {
-            const json = await (
-              await fetch(`${baseUrl}?type=${command.id}`)
-            ).json();
-
-            const { message: image, color } = json;
+            const json = await this.image();
 
             let id = Math.random().toString(36);
             id = id.slice(2, id.length);
@@ -47,8 +43,8 @@ export class CommandGenerator {
             message
               .util!.send(
                 new MessageEmbed()
-                  .setColor(color)
-                  .setImage(image)
+                  .setColor(json.color)
+                  .setImage(json.message)
                   .setFooter(
                     `${id} | ${message.author.username.truncate(25)}`,
                     message.author.displayAvatarURL({ dynamic: true })
@@ -56,7 +52,12 @@ export class CommandGenerator {
               )
               .then((msg) =>
                 this.client.favorites.add(
-                  { url: image, id, date: Date.now(), color },
+                  {
+                    url: json.message,
+                    id,
+                    date: Date.now(),
+                    color: json.color,
+                  },
                   msg
                 )
               );
@@ -67,6 +68,14 @@ export class CommandGenerator {
                 .setDescription(`Couldn't fetch data\n\`\`\`js\n${error}\`\`\``)
             );
           }
+        }
+
+        public async image() {
+          const json = await (
+            await fetch(`${baseUrl}?type=${command.id}`)
+          ).json();
+
+          return json;
         }
       }
 
