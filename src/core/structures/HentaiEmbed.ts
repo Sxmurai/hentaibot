@@ -26,4 +26,14 @@ export class HentaiEmbed extends MessageEmbed {
 
     return this;
   }
+
+  public appendDescription(content: StringResolvable) {
+    if (!this.description) {
+      this.description = content;
+    } else {
+      this.description += content;
+    }
+
+    return this;
+  }
 }

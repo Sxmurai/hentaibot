@@ -22,6 +22,19 @@ export const command = (id: string, options: CommandOptions = {}) => {
   };
 };
 
+export const sub = (id: string, options: CommandOptions = {}) => {
+  options.category = "flag";
+
+  return <T extends new (...args: any[]) => Command>(target: T): T => {
+    return class extends target {
+      constructor(...args: any[]) {
+        super(id, options);
+        void args;
+      }
+    };
+  };
+};
+
 /* Events */
 export const event = (id: string, options?: ListenerOptions) => {
   return <T extends new (...args: any[]) => Listener>(target: T): T => {

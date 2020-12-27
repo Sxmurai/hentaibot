@@ -4,6 +4,8 @@ import { AkairoClient } from "discord-akairo";
 export interface Cache {
   id: string;
   url: string;
+  date: number;
+  color: number;
 }
 
 export class FavoriteHandler {

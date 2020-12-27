@@ -26,7 +26,8 @@ export class CommandGenerator {
             aliases: [command.id, ...(command.aliases ?? [])],
             category: command.category ?? "hentai",
             description: {
-              content: command.description ?? "Displays a hentai related picutre",
+              content:
+                command.description ?? "Displays a hentai related picutre",
             },
             channel: "guild",
           });
@@ -54,7 +55,10 @@ export class CommandGenerator {
                   )
               )
               .then((msg) =>
-                this.client.favorites.add({ url: image, id }, msg)
+                this.client.favorites.add(
+                  { url: image, id, date: Date.now(), color },
+                  msg
+                )
               );
           } catch (error) {
             message.util!.send(
@@ -66,7 +70,7 @@ export class CommandGenerator {
         }
       }
 
-      this.client.commands.register(new GeneratedCommand())
+      this.client.commands.register(new GeneratedCommand());
     }
   }
 }
