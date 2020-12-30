@@ -11,7 +11,7 @@ const defaults: Setting = {
 };
 
 export class SettingsProvider {
-	private items: Map<string, Setting> = new Map();
+	public items: Map<string, Setting | any> = new Map();
 
 	public async init() {
 		for (const { id, data } of await Guilds.all()) {
